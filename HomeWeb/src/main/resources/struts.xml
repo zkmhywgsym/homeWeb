@@ -1,0 +1,83 @@
+
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	
+	<!-- 设置程序的运行模式为 开发模式 -->
+	<constant name="struts.devMode" value="false"></constant>
+	<!-- 设置默认的语言环境 中文 -->
+	<constant name="struts.locale" value="zh_CN"></constant>
+	<!-- 设置国际化的 编码为UTF-8 -->
+	<constant name="struts.18n.encoding" value="UTF-8"></constant>
+	<!-- 配置默认的扩展名为action -->
+	<constant name="struts.action.extension" value="action"></constant>
+	<!-- 设置主题为 simple -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 设置action名称常数 -->
+	<constant name="struts.allowed.action.names" value="[a-zA-Z]*" />
+	<!-- 设置文件上传大小500M -->
+	<constant name="struts.multipart.maxSize" value="524288000" />
+	
+    <package name="default" extends="struts-default" namespace="/">
+
+		<!-- <interceptors>
+			字符集拦截器
+			<interceptor name="encodingInterceptor" class="com.yisisoftware.interceptor.EncodingInterceptor" />
+			<interceptor-stack name="encodingStack">
+				<interceptor-ref name="monitoringStack"></interceptor-ref>
+				<interceptor-ref name="encodingInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors> -->
+		<!-- 全局拦截器栈 -->
+<!-- 		<default-interceptor-ref name="securityStack"></default-interceptor-ref>
+ -->		
+    </package>
+    
+    <!-- 基础数据 -->
+    <package name="base" extends="struts-default" namespace="/base">
+    	<!-- 用户登录action -->
+		<action name="userLogin" class="userInfoAction" method="userLogin"></action>
+    	<!-- 用户注销action -->
+		<action name="userDestory" class="userInfoAction" method="userdestory"></action>
+    </package>
+    
+    <!-- 业务数据 -->
+    <package name="inventory" extends="struts-default" namespace="/inventory">
+    	<!-- 库存统计action -->
+		<action name="wbWeightStatistics" class="wbWeightAction" method="statistics"></action>
+    	<!-- 库存明细管理action -->
+		<action name="getInventoryDetails" class="inventoryDetailsAction" method="getInventoryDetails"></action>
+		<!-- 获得库存明细列表action -->
+		<action name="getInventoryDetailsList" class="inventoryDetailsAction" method="getInventoryDetailsList"></action>
+		<!-- 获得库存明细列表统计action -->
+		<action name="getInventoryDetailsListCount" class="inventoryDetailsAction" method="getInventoryDetailsListQueryCount"></action>
+		<!-- 获得库存明细列表汇总action -->
+		<action name="getInventoryDetailsGroupCollect" class="inventoryDetailsAction" method="getInventoryDetailsGroupCollect"></action>
+		<!-- 获得库存明细列表汇总action -->
+		<action name="getInventoryDetailsGroupCollectnew" class="inventoryDetailsAction" method="getInventoryDetailsGroupCollectnew"></action>
+		<!-- 保存反馈意见action -->
+		<action name="saveFeedbackInfo" class="feedbackAction" method="saveFeedback"></action>
+		<!-- 保存apk维护信息action -->
+		<action name="apkPakeageSave" class="apkPakeageAction" method="saveApkInfo"></action>
+		<!-- 保存apk文件信息action -->
+		<action name="saveApkSaveFile" class="apkPakeageAction" method="saveApkFile"></action>
+		<!-- 下载apk文件action -->
+		<action name="apkFileDownload" class="apkPakeageAction" method="fileDownload">
+			<!-- result type设置为stream -->  
+		    <result name="download_success" type="stream">  
+		        <!-- MIME类型 -->  
+		        <param name="contentType">application/octet-stream</param>  
+		        <!-- inputName的值与action获取输入流资源的方法名相对应(action中定义getInputStream方法,并且返回类型为InputStream) -->  
+		        <param name="inputName">inputStream</param>  
+		        <!-- 设置带附件的文件 动态获取文件名(action中定义getDownloadFileName方法) -->  
+		        <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+		        <!-- 设置缓冲大小 -->  
+		        <param name="bufferSize">2048</param>  
+		    </result>  
+		</action>
+		
+		<!-- 对比apk文件版本信息action -->
+		<action name="contrastApkVersion" class="apkPakeageAction" method="contrastApkVersion"></action>
+    </package>
+</struts>
