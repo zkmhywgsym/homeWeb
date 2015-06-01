@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.yisisoftware.entity.WbMaterial;
 import com.yisisoftware.service.base.impl.BaseServiceImpl;
 import com.yisisoftware.service.business.inventory.WbMaterialServiceI;
 import com.yisisoftware.util.base.HqlFilter;
+import com.yisisoftware.view.WbMaterial;
 
 /**
  * 物料服务实现类

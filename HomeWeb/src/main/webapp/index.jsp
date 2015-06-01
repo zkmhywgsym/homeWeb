@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 	var username = mini.get("username").getValue();
 			var pwd = mini.get("pwd").getValue();
 			 $.ajax({
-	                url: "http://192.168.1.117:8080/webDemo/base/userLogin.action?",
+	                url: "<%=basePath%>base/userLogin.action?",
 	                type: "get",
 	                data: { "loginName":username , "loginPwd":pwd.MD5()},
 	                success: function (text) {
@@ -78,7 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                	 loginWindow.hide();
 		                     mini.loading("登录成功，马上转到系统...", "登录成功");
 		                     setTimeout(function () {
-		                         window.location = "<%=basePath%>web/fileUpload.jsp";
+		                         <%--window.location = "<%=basePath%>web/fileUpload.jsp";--%>
+		                         window.location = "<%=basePath%>map/map2.jsp";
 		                     }, 1500);
 	                	}else{
 	                		mini.alert("用户名或密码错误！");

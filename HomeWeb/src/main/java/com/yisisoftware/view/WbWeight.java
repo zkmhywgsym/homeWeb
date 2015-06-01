@@ -1,4 +1,4 @@
-package com.yisisoftware.entity;
+package com.yisisoftware.view;
 
 import java.util.Date;
 import javax.persistence.Column;

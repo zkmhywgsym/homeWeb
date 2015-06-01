@@ -1,4 +1,4 @@
-package com.yisisoftware.entity;
+package com.yisisoftware.view;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -7,13 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 客户实体
+ * 物料实体
  * 
- * WbCustomer entity. @author MyEclipse Persistence Tools
+ * WbMaterial entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "WB_Customer")
-public class WbCustomer implements java.io.Serializable {
+@Table(name = "WB_Material")
+public class WbMaterial implements java.io.Serializable {
 
 	// Fields
 
@@ -22,13 +22,9 @@ public class WbCustomer implements java.io.Serializable {
 	private String name;
 	private String ShortName;
 	private String spellCode;
-	private String iccard;
-	private String idcard;
-	private String rfcard;
-	private String area;
-	private String address;
-	private String contectPerson;
-	private String tel;
+	private Short type;
+	private Double price;
+	private Double trafficPrice;
 	private String createUser;
 	private Date createDate;
 	private String updateUser;
@@ -43,18 +39,17 @@ public class WbCustomer implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public WbCustomer() {
+	public WbMaterial() {
 	}
 
 	/** minimal constructor */
-	public WbCustomer(String id) {
+	public WbMaterial(String id) {
 		this.id = id;
 	}
 
 	/** full constructor */
-	public WbCustomer(String id, String code, String name, String ShortName,
-			String spellCode, String iccard, String idcard, String rfcard,
-			String area, String address, String contectPerson, String tel,
+	public WbMaterial(String id, String code, String name, String ShortName,
+			String spellCode, Short type, Double price, Double trafficPrice,
 			String createUser, Date createDate, String updateUser,
 			Date updateDate, String deleteUser, Date deleteDate, Short isDel,
 			Short isUse, Short upload, String memo) {
@@ -63,13 +58,9 @@ public class WbCustomer implements java.io.Serializable {
 		this.name = name;
 		this.ShortName = ShortName;
 		this.spellCode = spellCode;
-		this.iccard = iccard;
-		this.idcard = idcard;
-		this.rfcard = rfcard;
-		this.area = area;
-		this.address = address;
-		this.contectPerson = contectPerson;
-		this.tel = tel;
+		this.type = type;
+		this.price = price;
+		this.trafficPrice = trafficPrice;
 		this.createUser = createUser;
 		this.createDate = createDate;
 		this.updateUser = updateUser;
@@ -84,7 +75,7 @@ public class WbCustomer implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "Id", unique = true, nullable = false, length = 20)
+	@Column(name = "Id", unique = true, nullable = false, length = 70)
 	public String getId() {
 		return this.id;
 	}
@@ -129,67 +120,31 @@ public class WbCustomer implements java.io.Serializable {
 		this.spellCode = spellCode;
 	}
 
-	@Column(name = "ICCard", length = 20)
-	public String getIccard() {
-		return this.iccard;
+	@Column(name = "Type")
+	public Short getType() {
+		return this.type;
 	}
 
-	public void setIccard(String iccard) {
-		this.iccard = iccard;
+	public void setType(Short type) {
+		this.type = type;
 	}
 
-	@Column(name = "IDCard", length = 30)
-	public String getIdcard() {
-		return this.idcard;
+	@Column(name = "Price", precision = 18, scale = 3)
+	public Double getPrice() {
+		return this.price;
 	}
 
-	public void setIdcard(String idcard) {
-		this.idcard = idcard;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
-	@Column(name = "RFCard", length = 50)
-	public String getRfcard() {
-		return this.rfcard;
+	@Column(name = "TrafficPrice", precision = 18, scale = 3)
+	public Double getTrafficPrice() {
+		return this.trafficPrice;
 	}
 
-	public void setRfcard(String rfcard) {
-		this.rfcard = rfcard;
-	}
-
-	@Column(name = "Area", length = 20)
-	public String getArea() {
-		return this.area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
-	@Column(name = "Address")
-	public String getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	@Column(name = "ContectPerson")
-	public String getContectPerson() {
-		return this.contectPerson;
-	}
-
-	public void setContectPerson(String contectPerson) {
-		this.contectPerson = contectPerson;
-	}
-
-	@Column(name = "Tel", length = 50)
-	public String getTel() {
-		return this.tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setTrafficPrice(Double trafficPrice) {
+		this.trafficPrice = trafficPrice;
 	}
 
 	@Column(name = "CreateUser", length = 20)

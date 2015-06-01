@@ -16,11 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.yisisoftware.action.base.BaseAction;
-import com.yisisoftware.entity.WbCars;
-import com.yisisoftware.entity.WbCustomer;
-import com.yisisoftware.entity.WbMaterial;
-import com.yisisoftware.entity.WbSupply;
-import com.yisisoftware.entity.WbWeight;
 import com.yisisoftware.service.business.inventory.WbCarsServiceI;
 import com.yisisoftware.service.business.inventory.WbCustomerServiceI;
 import com.yisisoftware.service.business.inventory.WbMaterialServiceI;
@@ -29,6 +24,11 @@ import com.yisisoftware.service.business.statistics.WbWeightServiceI;
 import com.yisisoftware.util.base.Constant;
 import com.yisisoftware.util.base.DateUtil;
 import com.yisisoftware.util.base.HqlFilter;
+import com.yisisoftware.view.WbCars;
+import com.yisisoftware.view.WbCustomer;
+import com.yisisoftware.view.WbMaterial;
+import com.yisisoftware.view.WbSupply;
+import com.yisisoftware.view.WbWeight;
 
 /**
  * 库存明细管理

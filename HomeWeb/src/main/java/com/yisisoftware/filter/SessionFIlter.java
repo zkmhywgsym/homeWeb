@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.alibaba.fastjson.JSON;
+import com.yisisoftware.databaseUtils.DatabaseHolder;
 import com.yisisoftware.util.base.ConfigUtil;
 
 /**
@@ -75,6 +76,7 @@ public class SessionFIlter implements Filter{
 			}
 		}
 		chain.doFilter(request, response);
+		DatabaseHolder.getInstance().setDataBaseSource(DatabaseHolder.getDbKeys(0).toString());
 	}
 
 	@Override

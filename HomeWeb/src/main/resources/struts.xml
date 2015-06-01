@@ -40,8 +40,14 @@
 		<action name="userLogin" class="userInfoAction" method="userLogin"></action>
     	<!-- 用户注销action -->
 		<action name="userDestory" class="userInfoAction" method="userdestory"></action>
+		<action name="userReg" class="userInfoAction" method="regUserInfo"></action>
+		<action name="userReset" class="userInfoAction" method="userReset"></action>
     </package>
-    
+    <!-- 测试数据 -->
+    <package name="test" extends="struts-default" namespace="/test">
+		<action name="testSavePoint" class="testAction" method="testSavePoint"></action>
+		<action name="testGetPoint" class="testAction" method="testGetPoint"></action>
+     </package>
     <!-- 业务数据 -->
     <package name="inventory" extends="struts-default" namespace="/inventory">
     	<!-- 库存统计action -->

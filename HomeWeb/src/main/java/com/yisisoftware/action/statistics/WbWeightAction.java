@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.yisisoftware.action.base.BaseAction;
-import com.yisisoftware.entity.WbWeight;
 import com.yisisoftware.entity.view.WbWeightView;
 import com.yisisoftware.service.business.statistics.WbWeightServiceI;
 import com.yisisoftware.util.base.Constant;
 import com.yisisoftware.util.base.HqlFilter;
+import com.yisisoftware.view.WbWeight;
 
 /**
  * 出入库统计分析

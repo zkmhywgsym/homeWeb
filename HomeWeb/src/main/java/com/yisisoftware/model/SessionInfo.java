@@ -2,7 +2,8 @@ package com.yisisoftware.model;
 
 import java.io.Serializable;
 
-import com.yisisoftware.entity.WbAdminUser;
+import com.yisisoftware.entity.LoginUser;
+
 /**
  * 存储session信息
  * 
@@ -11,14 +12,14 @@ import com.yisisoftware.entity.WbAdminUser;
  */
 public class SessionInfo implements Serializable {
 
-	private WbAdminUser wbAdminUser;
+	private LoginUser user;
 
-	public WbAdminUser getWbAdminUser() {
-		return wbAdminUser;
+	public LoginUser getUser() {
+		return user;
 	}
 
-	public void setWbAdminUser(WbAdminUser wbAdminUser) {
-		this.wbAdminUser = wbAdminUser;
+	public void setUser(LoginUser User) {
+		this.user = User;
 	}
 	
 }

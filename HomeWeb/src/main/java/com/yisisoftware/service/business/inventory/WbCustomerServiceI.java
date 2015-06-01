@@ -1,7 +1,7 @@
 package com.yisisoftware.service.business.inventory;
 
-import com.yisisoftware.entity.WbCustomer;
 import com.yisisoftware.service.base.IBaseService;
+import com.yisisoftware.view.WbCustomer;
 /**
  * 客户接口
  * 

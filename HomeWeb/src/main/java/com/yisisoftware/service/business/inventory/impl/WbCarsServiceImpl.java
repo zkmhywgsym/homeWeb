@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.yisisoftware.entity.WbCars;
 import com.yisisoftware.service.base.impl.BaseServiceImpl;
 import com.yisisoftware.service.business.inventory.WbCarsServiceI;
 import com.yisisoftware.util.base.HqlFilter;
+import com.yisisoftware.view.WbCars;
 /**
  * 车牌信息实现类
  * 

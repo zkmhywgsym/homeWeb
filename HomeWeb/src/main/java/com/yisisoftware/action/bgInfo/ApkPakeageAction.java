@@ -341,21 +341,24 @@ public class ApkPakeageAction extends BaseAction {
      */
     public void contrastApkVersion(){
     	String apkVersion = getRequest().getParameter("verCode");	//获得版本号
+    	String appName = getRequest().getParameter("appName");	//获得版本号
     	
     	//首先判断版本号是否为空
-    	if(StringUtils.isNotEmpty(apkVersion)){
-    		String msg = "";
-    		boolean havaNewVersion = false;
+    	if(StringUtils.isNotEmpty(apkVersion)&&StringUtils.isNotEmpty(appName)){
     		Map<String , Object> bakMap = new HashMap<>();
     		
-    		HqlFilter hqlFilter = new HqlFilter();
-    		hqlFilter.addFilter("QUERY_t#verCode_L_EQ", apkVersion);
-    		List<ApkPakeage>  apkPakeages = this.apkPakeageService.findByFilter(hqlFilter);
+//    		HqlFilter hqlFilter = new HqlFilter();
+//    		hqlFilter.addFilter("QUERY_t#verCode_L_EQ", apkVersion);
+//    		hqlFilter.addFilter("QUERY_t#appname_S_EQ", appName);
+//    		List<ApkPakeage>  apkPakeages = this.apkPakeageService.findByFilter(hqlFilter);
     		
 			HqlFilter hqlFilter2 = new HqlFilter();
+//    		hqlFilter2.addFilter("QUERY_t#appname_S_EQ", appName);
 			hqlFilter2.addOrder("desc");
 			hqlFilter2.addSort("verCode");
 			String hql = "from ApkPakeage t";
+//			String sql="select * from ApkPakeage t where 1=1  and t.appname =  :parama4db03a9b59745208a538edc61d30c37  order by t.verCode desc ";
+//			apkPakeageService.getByHql(sql, bakMap);
 			List<ApkPakeage>  apkPakeages2 = this.apkPakeageService.find(hql+hqlFilter2.getWhereAndOrderHql());
     			
 			if(apkPakeages2.size() != 0){

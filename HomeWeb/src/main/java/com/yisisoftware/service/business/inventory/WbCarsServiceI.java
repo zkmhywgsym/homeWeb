@@ -1,7 +1,7 @@
 package com.yisisoftware.service.business.inventory;
 
-import com.yisisoftware.entity.WbCars;
 import com.yisisoftware.service.base.IBaseService;
+import com.yisisoftware.view.WbCars;
 
 /**
  * 车牌号 服务

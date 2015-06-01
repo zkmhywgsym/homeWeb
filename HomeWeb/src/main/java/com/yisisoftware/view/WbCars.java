@@ -1,4 +1,4 @@
-package com.yisisoftware.entity;
+package com.yisisoftware.view;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -7,25 +7,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 供货商 实体
+ * 车牌实体
  * 
- * WbSupply entity. @author MyEclipse Persistence Tools
+ * WbCars entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "WB_Supply")
-public class WbSupply implements java.io.Serializable {
+@Table(name = "WB_Cars")
+public class WbCars implements java.io.Serializable {
 
 	// Fields
 
 	private String id;
 	private String code;
+	private String carType;
+	private String trafficCompany;
 	private String name;
 	private String ShortName;
 	private String spellCode;
 	private String iccard;
 	private String idcard;
 	private String rfcard;
-	private String contectPerson;
+	private Double loadWeight;
+	private Double tare;
+	private Double charge;
+	private String owner;
+	private String driver;
 	private String tel;
 	private String area;
 	private String address;
@@ -39,34 +45,43 @@ public class WbSupply implements java.io.Serializable {
 	private Short isUse;
 	private Short upload;
 	private String memo;
+	private Integer carprop;
 
 	// Constructors
 
 	/** default constructor */
-	public WbSupply() {
+	public WbCars() {
 	}
 
 	/** minimal constructor */
-	public WbSupply(String id) {
+	public WbCars(String id) {
 		this.id = id;
 	}
 
 	/** full constructor */
-	public WbSupply(String id, String code, String name, String ShortName,
+	public WbCars(String id, String code, String carType,
+			String trafficCompany, String name, String ShortName,
 			String spellCode, String iccard, String idcard, String rfcard,
-			String contectPerson, String tel, String area, String address,
+			Double loadWeight, Double tare, Double charge, String owner,
+			String driver, String tel, String area, String address,
 			String createUser, Date createDate, String updateUser,
 			Date updateDate, String deleteUser, Date deleteDate, Short isDel,
-			Short isUse, Short upload, String memo) {
+			Short isUse, Short upload, String memo, Integer carprop) {
 		this.id = id;
 		this.code = code;
+		this.carType = carType;
+		this.trafficCompany = trafficCompany;
 		this.name = name;
 		this.ShortName = ShortName;
 		this.spellCode = spellCode;
 		this.iccard = iccard;
 		this.idcard = idcard;
 		this.rfcard = rfcard;
-		this.contectPerson = contectPerson;
+		this.loadWeight = loadWeight;
+		this.tare = tare;
+		this.charge = charge;
+		this.owner = owner;
+		this.driver = driver;
 		this.tel = tel;
 		this.area = area;
 		this.address = address;
@@ -80,11 +95,12 @@ public class WbSupply implements java.io.Serializable {
 		this.isUse = isUse;
 		this.upload = upload;
 		this.memo = memo;
+		this.carprop = carprop;
 	}
 
 	// Property accessors
 	@Id
-	@Column(name = "Id", unique = true, nullable = false, length = 70)
+	@Column(name = "Id", unique = true, nullable = false, length = 20)
 	public String getId() {
 		return this.id;
 	}
@@ -100,6 +116,24 @@ public class WbSupply implements java.io.Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	@Column(name = "CarType", length = 20)
+	public String getCarType() {
+		return this.carType;
+	}
+
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
+
+	@Column(name = "TrafficCompany", length = 20)
+	public String getTrafficCompany() {
+		return this.trafficCompany;
+	}
+
+	public void setTrafficCompany(String trafficCompany) {
+		this.trafficCompany = trafficCompany;
 	}
 
 	@Column(name = "Name")
@@ -156,13 +190,49 @@ public class WbSupply implements java.io.Serializable {
 		this.rfcard = rfcard;
 	}
 
-	@Column(name = "ContectPerson")
-	public String getContectPerson() {
-		return this.contectPerson;
+	@Column(name = "LoadWeight", precision = 18, scale = 3)
+	public Double getLoadWeight() {
+		return this.loadWeight;
 	}
 
-	public void setContectPerson(String contectPerson) {
-		this.contectPerson = contectPerson;
+	public void setLoadWeight(Double loadWeight) {
+		this.loadWeight = loadWeight;
+	}
+
+	@Column(name = "Tare", precision = 18, scale = 3)
+	public Double getTare() {
+		return this.tare;
+	}
+
+	public void setTare(Double tare) {
+		this.tare = tare;
+	}
+
+	@Column(name = "Charge", precision = 18, scale = 3)
+	public Double getCharge() {
+		return this.charge;
+	}
+
+	public void setCharge(Double charge) {
+		this.charge = charge;
+	}
+
+	@Column(name = "Owner")
+	public String getOwner() {
+		return this.owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	@Column(name = "Driver", length = 20)
+	public String getDriver() {
+		return this.driver;
+	}
+
+	public void setDriver(String driver) {
+		this.driver = driver;
 	}
 
 	@Column(name = "Tel")
@@ -280,6 +350,15 @@ public class WbSupply implements java.io.Serializable {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	@Column(name = "carprop")
+	public Integer getCarprop() {
+		return this.carprop;
+	}
+
+	public void setCarprop(Integer carprop) {
+		this.carprop = carprop;
 	}
 
 }

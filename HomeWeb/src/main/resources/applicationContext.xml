@@ -11,21 +11,40 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 标准配置 -->
+				<value>classpath*:/database.properties</value>
+			</list>
+		</property>
+	</bean>
 	<!-- 自动扫描装配bean -->
 	<context:component-scan base-package="com.yisisoftware"></context:component-scan>
-
+	<!-- 多数据库配置 -->
+	<bean id="onlineDynamicDataSource" class="com.yisisoftware.databaseUtils.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="innerDB" value-ref="innerDB" />
+				<entry key="outterDB" value-ref="outterDB" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="innerDB" />
+	</bean>
+	<!-- 多数据库配置 -->
 	<!-- 配置数据源 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+	<bean id="parent" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 		<!-- 基本属性 url、user、password -->
-		<!-- <property name="url"
-			value="jdbc:sqlserver://192.168.1.11:1433;databaseName=TDCC_2015_0127" />
-		<property name="url"
-			value="jdbc:sqlserver://192.168.1.117:1433;databaseName=androidTest" /> -->
-			<property name="url"
-			value="jdbc:sqlserver://localhost\SQLSERVE2005:1433;databaseName=androidTest" />
-		<property name="username" value="sa" />
-		<property name="password" value="hyqpwd" />
+		<!-- <property name="url" value="jdbc:sqlserver://192.168.1.11:1433;databaseName=TDCC_2015_0127" 
+			/> <property name="url" value="jdbc:sqlserver://192.168.1.117:1433;databaseName=androidTest" 
+			/> -->
+		<property name="url" value="${sqlserver.name}" />
+		<property name="username" value="${sqlserver.user}" />
+		<property name="password" value="${sqlserver.pwd}" />
 
 		<!-- 配置初始化大小、最小、最大 -->
 		<property name="initialSize" value="1" />
@@ -54,41 +73,54 @@
 		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
 		<property name="filters" value="stat" />
 	</bean>
+	<bean id="innerDB" parent="parent">
+		<property name="url" value="${sqlserver.name2}" />
+		<property name="username" value="${sqlserver.user2}" />
+		<property name="password" value="${sqlserver.pwd2}" />
+	</bean>
+	<bean id="outterDB" parent="parent">
+		<property name="url" value="${sqlserver.name}" />
+		<property name="username" value="${sqlserver.user}" />
+		<property name="password" value="${sqlserver.pwd}" />
+	</bean>
 
 	<!-- 配置druid监控spring jdbc -->
-	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
 
-	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		scope="prototype">
 		<property name="patterns">
 			<list>
-				<value>com.yisisoftware.service.*</value>
+				<value>${package}.service.*</value>
 			</list>
 		</property>
 	</bean>
 	<aop:config>
-		<aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />
+		<aop:advisor advice-ref="druid-stat-interceptor"
+			pointcut-ref="druid-stat-pointcut" />
 	</aop:config>
 
 	<!-- 配置sessionFactory -->
 	<bean name="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="onlineDynamicDataSource"></property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.yisisoftware.entity</value>
+				<value>${package}.entity</value>
 			</list>
 		</property>
 		<!-- 配置hibernate的属性 -->
 		<property name="hibernateProperties">
 			<props>
 				<!-- 制定hibernate的方言 -->
-				<prop key="hibernate.dialect">com.yisisoftware.util.base.SqlServer2008Dialect</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<!-- 是否显示hibernate语句 -->
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<!-- 是否格式化sql语句 -->
-				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
 				<!-- 加载hibernate 自动更新或者创建数据库 -->
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="javax.persistence.validation.mode">none</prop>
 			</props>
 		</property>
@@ -122,12 +154,13 @@
 
 
 			<tx:method name="init*" propagation="REQUIRED" />
-			
+
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>
 		<!-- 第一个*代表所有的返回值类型；第二个*代表所有的类；第三个*代表类所有方法；..代表子或者孙子包；最后一个..代表所有的参数 -->
-		<aop:pointcut id="transactionPointcut" expression="(execution(* com.yisisoftware.service..*Impl.*(..)))" />
+		<aop:pointcut id="transactionPointcut"
+			expression="(execution(* com.yisisoftware.service..*Impl.*(..)))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>
