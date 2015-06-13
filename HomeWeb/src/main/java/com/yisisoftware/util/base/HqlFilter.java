@@ -195,7 +195,6 @@ public class HqlFilter {
 				Date date = DateUtils.parseDate(value, new String[]{ "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM-dd", "yyyy/MM/dd" });
 				return new java.sql.Date(date.getTime()); //转换为sql.date 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

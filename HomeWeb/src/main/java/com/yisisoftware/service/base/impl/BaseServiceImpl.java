@@ -67,38 +67,32 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 
 	@Override
 	public T getByHql(String hql, Map<String, Object> params) {
-		// TODO Auto-generated method stub
 		return baseDao.getByHql(hql, params);
 	}
 
 	@Override
 	public List<T> find(String hql) {
-		// TODO Auto-generated method stub
 		return baseDao.find(hql);
 	}
 
 	@Override
 	public List<T> find(String hql, Map<String, Object> params) {
-		// TODO Auto-generated method stub
 		return baseDao.find(hql, params);
 	}
 
 	@Override
 	public List<T> find(String hql, int page, int rows) {
-		// TODO Auto-generated method stub
 		return baseDao.find(hql, page, rows);
 	}
 
 	@Override
 	public List<T> find(String hql, Map<String, Object> params, int page,
 			int rows) {
-		// TODO Auto-generated method stub
 		return baseDao.find(hql, params, page, rows);
 	}
 
 	@Override
 	public void deleteList(List list) {
-		// TODO Auto-generated method stub
 		for(int i=0;i<list.size();i++){
 			baseDao.delete((T) list.get(i));
 		}
@@ -106,7 +100,6 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 
 	@Override
 	public void updateList(List list) {
-		// TODO Auto-generated method stub
 		for(int i=0;i<list.size();i++){
 			baseDao.update((T) list.get(i));
 		}
@@ -114,25 +107,23 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
 
 	@Override
 	public Long count(String hql) {
-		// TODO Auto-generated method stub
 		return baseDao.count(hql);
 	}
 
 	@Override
 	public Long count(String hql, Map<String, Object> params) {
-		// TODO Auto-generated method stub
 		return baseDao.count(hql, params);
 	}
 
 	@Override
 	public void executeProcedure(String procedureName, Object[] objs) {
-		// TODO Auto-generated method stub
+		
 		baseDao.executeProcedure(procedureName, objs);
 	}
 
 	@Override
 	public T executeProcedure(String procedureName, Object[] objs, int type) {
-		// TODO Auto-generated method stub
+		
 		return baseDao.executeProcedure(procedureName, objs, type);
 	}
 

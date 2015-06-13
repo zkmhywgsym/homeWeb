@@ -1,9 +1,9 @@
 /*
- '��ע���ļ����룬����ͻ��˵�md5�ļ�����ͷ������˵�md5�ļ����벻һ��������ܳ������ַ�����һ��
- '�޸�:xilou 2080711
- '����:
-       'www.chinacms.org'.MD5();//Ĭ��Ϊ16λ����
-	   'www.chinacms.org'.MD5(32);//32λ����
+ '请注意文件编码，如果客户端的md5文件编码和服务器端的md5文件编码不一样，则加密出来的字符串不一样
+ '修改:xilou 2080711
+ '例子:
+       'www.chinacms.org'.MD5();//默认为16位加密
+	   'www.chinacms.org'.MD5(32);//32位加密
 */
 String.prototype.MD5 = function (bit)
 {

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.yisisoftware.action.base.BaseAction;
+import com.yisisoftware.databaseUtils.DatabaseHolder;
 import com.yisisoftware.service.business.inventory.WbCarsServiceI;
 import com.yisisoftware.service.business.inventory.WbCustomerServiceI;
 import com.yisisoftware.service.business.inventory.WbMaterialServiceI;
@@ -84,6 +85,7 @@ public class InventoryDetailsAction extends BaseAction {
 		//获得车牌号
 		String sql = "SELECT DISTINCT SUBSTRING(ShortName, 0, 2) as car from WB_Cars t "+
 				"where IsNumeric(t.ShortName)=0 AND ascii(SUBSTRING(ShortName, 0, 2)) > 123";
+		DatabaseHolder.getInstance().setDataBaseSource(DatabaseHolder.getDbKeys(1).toString());
 		List<Object> carsList = this.wbCarsService.findBySql(sql);
 		//获得客户列表
 		List<WbCustomer> customersList = this.wbCustomerService.find();
@@ -193,7 +195,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				beginDate = dateformat.parse(startTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -202,7 +203,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				endDate = dateformat.parse(endTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -318,7 +318,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				beginDate = dateformat.parse(startTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -327,7 +326,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				endDate = dateformat.parse(endTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -438,7 +436,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				beginDate = dateformat.parse(startTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -447,7 +444,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				endDate = dateformat.parse(endTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -548,7 +544,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				beginDate = dateformat.parse(startTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -557,7 +552,6 @@ public class InventoryDetailsAction extends BaseAction {
 			try {
 				endDate = dateformat.parse(endTime);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

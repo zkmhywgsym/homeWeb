@@ -8,17 +8,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.yisisoftware.entity.TestMapPoint;
+import com.yisisoftware.entity.MapPoint;
 //坐标转换
 public class TestMapUtils {
 	private static String url = "http://api.map.baidu.com/geoconv/v1/?";
 	private static String ak = "nMbwPGhLNAptpWmfmWTUv8dP";
 
 	// coords=114.21892734521,29.575429778924;114.21892734521,29.575429778924&from=1&to=5&ak=nMbwPGhLNAptpWmfmWTUv8dP";
-	public static TestMapPoint gps2BaiDuPoint(TestMapPoint p) {
+	public static MapPoint gps2BaiDuPoint(MapPoint p) {
 		try {
 
 			if (p != null) {
@@ -66,7 +67,7 @@ public class TestMapUtils {
 		return p;
 	}
 	public static void main(String[] args) {
-		TestMapPoint point=gps2BaiDuPoint(new TestMapPoint(114.21892734521,29.575429778924));
+		MapPoint point=gps2BaiDuPoint(new MapPoint(0, 114.21892734521,29.575429778924, new Date(), "15034010946", "e_01", "wf"));//(114.21892734521,29.575429778924));
 		System.out.println("longitude:"+point.getLongitude()+"latitude:"+point.getLatitude());
 	}
 }

@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                     mini.loading("登录成功，马上转到系统...", "登录成功");
 		                     setTimeout(function () {
 		                         <%--window.location = "<%=basePath%>web/fileUpload.jsp";--%>
-		                         window.location = "<%=basePath%>map/map2.jsp";
+		                         window.location = "<%=basePath%>map/map.jsp";
 		                     }, 1500);
 	                	}else{
 	                		mini.alert("用户名或密码错误！");

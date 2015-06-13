@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<td style="width: 82px;">文件</td>
     			<td><input id="fileupload1"  class="mini-fileupload" name="uploadfile" limitType="*.apk" style="width: 300px;"
 				    flashUrl="scripts/swfupload/swfupload.swf"
-				    uploadUrl="<%=basePath%>inventory/saveApkSaveFile.action"
+				    uploadUrl="<%=basePath%>base/saveApkSaveFile.action"
 				    onuploadsuccess="onUploadSuccess" 
     				onuploaderror="onUploadError"
     				uploadOnSelect ="true"
@@ -114,7 +114,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	var data = form.getData();      //获取表单多个控件的数据
 	    	var json = mini.encode(data);   //序列化成JSON
 	    	$.ajax({
-	    	    url: "inventory/apkPakeageSave.action",
+	    	    url: "base/apkPakeageSave.action",
 	    	    type: "post",
 	    	    data: { "submitData": json, "fileName":fileName},
 	    	    success: function (text) {

@@ -8,49 +8,42 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name = "map_point")
-public class TestMapPoint {
+@Table(name = "work_space")
+public class WorkSpace {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	private String name;
 	private double longitude;
 	private double latitude;
-	private Date time;
-	public TestMapPoint() {
+	private int radius;
+	private String sons;
+	
+	public WorkSpace() {
 		super();
 	}
-	
-	public TestMapPoint(double longitude, double latitude) {
+	public WorkSpace(int id, String name, double longitude, double latitude,
+			int radius, String sons) {
 		super();
+		this.id = id;
+		this.name = name;
 		this.longitude = longitude;
 		this.latitude = latitude;
+		this.radius = radius;
+		this.sons = sons;
 	}
-
-	
-	public TestMapPoint(double longitude, double latitude, Date time) {
-		super();
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.time = time;
-	}
-
-	
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public Date getTime() {
-		return time;
+	public String getName() {
+		return name;
 	}
-
-	public void setTime(Date time) {
-		this.time = time;
+	public void setName(String name) {
+		this.name = name;
 	}
-
 	public double getLongitude() {
 		return longitude;
 	}
@@ -63,11 +56,17 @@ public class TestMapPoint {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-
-	@Override
-	public String toString() {
-		return "MapPoint [longitude=" + longitude + ", latitude=" + latitude
-				+ "]";
+	public int getRadius() {
+		return radius;
+	}
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+	public String getSons() {
+		return sons;
+	}
+	public void setSons(String sons) {
+		this.sons = sons;
 	}
 	
 

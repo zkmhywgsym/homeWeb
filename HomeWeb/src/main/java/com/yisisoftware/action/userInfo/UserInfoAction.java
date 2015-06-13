@@ -34,9 +34,10 @@ public class UserInfoAction extends BaseAction {
 	 * 用户登录验证
 	 */
 	public void userLogin() {
-		System.out.println("login");
-		String userName = this.getRequest().getParameter("loginName"); // 获得用户名
-		String userPassWord = this.getRequest().getParameter("loginPwd"); // 获得密码；
+		String userName = this.getRequest().getParameter("loginName"); // 获得用户名	//
+		String userPassWord = this.getRequest().getParameter("loginPwd"); // 获得密码；//
+		String deviceId = this.getRequest().getParameter("deviceId"); // 获得密码；//
+		logger.info("用户"+userName+"开始登陆");
 		Map<String, String> map = new HashMap<>();
 
 		try {
@@ -60,17 +61,24 @@ public class UserInfoAction extends BaseAction {
 					// ConfigUtil.getSessionInfoName());
 					// 登录成功
 					map.put("loginStatus", "success");
+					//保存设备名称
+					if(!com.alibaba.druid.util.StringUtils.isEmpty(deviceId)){
+						getSession().setAttribute("deviceId", deviceId);
+					}
+					logger.info("用户"+userName+"登陆成功");
 				} else {
 					// 登录失败
+					logger.info("用户"+userName+"登陆失败：原因是用户名密码不对应");
 					map.put("loginStatus", "userOrPwdErr");
 				}
 			} else {
 				// 未输入用户名或密码
+				logger.info("用户登陆失败：原因是用户名密码或密码为空");
 				map.put("loginStatus", "other");
 			}
 		} catch (Exception e) {
 			// 登录异常 发生未知异常时返回
-			logger.error("系统出现异常：" + e);
+			logger.error("登陆时系统出现异常：" + e);
 			map.put("loginStatus", "other");
 		} finally {
 			writeJson(map);

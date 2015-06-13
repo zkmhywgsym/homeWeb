@@ -101,9 +101,9 @@ public class ApkPakeageAction extends BaseAction {
 				apkPakeage.setApkname(filename); //设置apk名称
 				
 				//获得项目url路径
-				String basePath = getRequest().getScheme()+"://"+getRequest().getServerName()+":"+getRequest().getServerPort()
-						+getRequest().getContextPath()+"/";
-				apkPakeage.setApkUrl(basePath+"inventory/apkFileDownload.action?fileName="+downloadFileName);
+//				String basePath = getRequest().getScheme()+"://"+getRequest().getServerName()+":"+getRequest().getServerPort()
+//						+getRequest().getContextPath()+"/";
+				apkPakeage.setApkUrl("base/apkFileDownload.action?fileName="+downloadFileName);
 				
 				this.apkPakeageService.save(apkPakeage);
 				result = true;
@@ -113,7 +113,6 @@ public class ApkPakeageAction extends BaseAction {
 				msg = "系统已存在相同版本号";
 			}
 		} catch (com.alibaba.fastjson.JSONException e) {
-			// TODO Auto-generated catch block
 			msg = "版本号只能是数字";
 		}finally{
 			
@@ -253,7 +252,14 @@ public class ApkPakeageAction extends BaseAction {
 		}
 		return apkName;
     }
-	
+    public int getFileLength() {  
+    	try {
+			return getInputStream().available();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
+    }
 	/**
 	 * 保存apk文件
 	 */
@@ -359,8 +365,8 @@ public class ApkPakeageAction extends BaseAction {
 			String hql = "from ApkPakeage t";
 //			String sql="select * from ApkPakeage t where 1=1  and t.appname =  :parama4db03a9b59745208a538edc61d30c37  order by t.verCode desc ";
 //			apkPakeageService.getByHql(sql, bakMap);
-			List<ApkPakeage>  apkPakeages2 = this.apkPakeageService.find(hql+hqlFilter2.getWhereAndOrderHql());
-    			
+			String sql=hql+hqlFilter2.getWhereAndOrderHql();
+			List<ApkPakeage>  apkPakeages2 = this.apkPakeageService.find(sql);
 			if(apkPakeages2.size() != 0){
 				ApkPakeage apk = apkPakeages2.get(0);
 				writeJson(apk);

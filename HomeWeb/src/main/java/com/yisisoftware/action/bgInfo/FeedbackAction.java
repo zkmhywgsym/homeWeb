@@ -35,7 +35,6 @@ public class FeedbackAction extends BaseAction {
 		boolean flag = false;
 		Feedback feedback = new Feedback();
 		String msg = "";
-		
 		String feedBackStyle = getRequest().getParameter("feedBackStyle");	//意见类型
 		String feedBackContent = getRequest().getParameter("feedBackContent");	//意见内容
 		String feedBackContact = getRequest().getParameter("feedBackContact");	//联系方式

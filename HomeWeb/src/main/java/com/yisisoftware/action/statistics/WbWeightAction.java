@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.yisisoftware.action.base.BaseAction;
+import com.yisisoftware.databaseUtils.DatabaseHolder;
 import com.yisisoftware.entity.view.WbWeightView;
 import com.yisisoftware.service.business.statistics.WbWeightServiceI;
 import com.yisisoftware.util.base.Constant;
@@ -91,6 +92,7 @@ public class WbWeightAction extends BaseAction {
 	 */
 	private List<WbWeightView> findWbWeightViewListByType(String sql){
 		List<WbWeightView> backList = new ArrayList<>();
+		DatabaseHolder.getInstance().setDataBaseSource(DatabaseHolder.getDbKeys(1).toString());	
 		List<Object[]> list = this.WbWeightService.findBySql(sql);
 		if(StringUtils.isNotEmpty(sql)){
 			for(Object[] w: list){

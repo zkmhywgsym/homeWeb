@@ -40,13 +40,48 @@
 		<action name="userLogin" class="userInfoAction" method="userLogin"></action>
     	<!-- 用户注销action -->
 		<action name="userDestory" class="userInfoAction" method="userdestory"></action>
+    	<!-- 用户注册action -->
 		<action name="userReg" class="userInfoAction" method="regUserInfo"></action>
+    	<!-- 用户重置action -->
 		<action name="userReset" class="userInfoAction" method="userReset"></action>
+		<!-- 保存反馈意见action -->
+		<action name="saveFeedbackInfo" class="feedbackAction" method="saveFeedback"></action>
+		<!-- 保存apk维护信息action -->
+		<action name="apkPakeageSave" class="apkPakeageAction" method="saveApkInfo"></action>
+		<!-- 保存日志文件action -->
+		<action name="saveCrashFile" class="crashAction" method="saveCrash"></action>
+		<!-- 保存apk文件信息action -->
+		<action name="saveApkSaveFile" class="apkPakeageAction" method="saveApkFile"></action>
+		<!-- 下载apk文件action -->
+		<action name="apkFileDownload" class="apkPakeageAction" method="fileDownload">
+			<!-- result type设置为stream -->  
+		    <result name="download_success" type="stream">  
+		        <!-- MIME类型 -->  
+		        <param name="contentType">application/octet-stream</param>  
+		        <!-- inputName的值与action获取输入流资源的方法名相对应(action中定义getInputStream方法,并且返回类型为InputStream) -->  
+		        <param name="inputName">inputStream</param>  
+		        <!-- 设置带附件的文件 动态获取文件名(action中定义getDownloadFileName方法) -->  
+		        <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+		        <!-- 设置缓冲大小 -->  
+		        <param name="bufferSize">2048</param> 
+		        <!-- 文件大小  --> 
+		        <param name="contentLength">${fileLength}</param>
+		    </result>  
+		</action>
+		
+		<!-- 对比apk文件版本信息action -->
+		<action name="contrastApkVersion" class="apkPakeageAction" method="contrastApkVersion"></action>
     </package>
     <!-- 测试数据 -->
-    <package name="test" extends="struts-default" namespace="/test">
-		<action name="testSavePoint" class="testAction" method="testSavePoint"></action>
-		<action name="testGetPoint" class="testAction" method="testGetPoint"></action>
+    <package name="msg" extends="struts-default" namespace="/msg">
+		<action name="saveMsg" class="msgAction" method="saveICInfo"></action>
+    </package>
+    <!-- 测试数据 -->
+    <package name="map" extends="struts-default" namespace="/map">
+		<action name="savePoint" class="locationAction" method="savePoint"></action>
+		<action name="getPoint" class="locationAction" method="getMapPoint"></action>
+		<action name="getAllPoints" class="locationAction" method="getAllPoints"></action>
+		<action name="drawMap" class="locationAction" method="drawMap"></action>
      </package>
     <!-- 业务数据 -->
     <package name="inventory" extends="struts-default" namespace="/inventory">
@@ -62,28 +97,5 @@
 		<action name="getInventoryDetailsGroupCollect" class="inventoryDetailsAction" method="getInventoryDetailsGroupCollect"></action>
 		<!-- 获得库存明细列表汇总action -->
 		<action name="getInventoryDetailsGroupCollectnew" class="inventoryDetailsAction" method="getInventoryDetailsGroupCollectnew"></action>
-		<!-- 保存反馈意见action -->
-		<action name="saveFeedbackInfo" class="feedbackAction" method="saveFeedback"></action>
-		<!-- 保存apk维护信息action -->
-		<action name="apkPakeageSave" class="apkPakeageAction" method="saveApkInfo"></action>
-		<!-- 保存apk文件信息action -->
-		<action name="saveApkSaveFile" class="apkPakeageAction" method="saveApkFile"></action>
-		<!-- 下载apk文件action -->
-		<action name="apkFileDownload" class="apkPakeageAction" method="fileDownload">
-			<!-- result type设置为stream -->  
-		    <result name="download_success" type="stream">  
-		        <!-- MIME类型 -->  
-		        <param name="contentType">application/octet-stream</param>  
-		        <!-- inputName的值与action获取输入流资源的方法名相对应(action中定义getInputStream方法,并且返回类型为InputStream) -->  
-		        <param name="inputName">inputStream</param>  
-		        <!-- 设置带附件的文件 动态获取文件名(action中定义getDownloadFileName方法) -->  
-		        <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
-		        <!-- 设置缓冲大小 -->  
-		        <param name="bufferSize">2048</param>  
-		    </result>  
-		</action>
-		
-		<!-- 对比apk文件版本信息action -->
-		<action name="contrastApkVersion" class="apkPakeageAction" method="contrastApkVersion"></action>
     </package>
 </struts>

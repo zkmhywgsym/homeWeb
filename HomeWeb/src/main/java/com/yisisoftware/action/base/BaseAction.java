@@ -183,7 +183,6 @@ public class BaseAction extends ActionSupport  implements ServletContextAware,Se
 
 	@Override
 	public void setSession(Map<String, Object> arg0) {
-		// TODO Auto-generated method stub
 		sessionMapb = arg0;
 	}
 
