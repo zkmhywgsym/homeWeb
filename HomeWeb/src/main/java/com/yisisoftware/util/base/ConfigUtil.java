@@ -20,6 +20,22 @@ public class ConfigUtil {
 	public static final String getSessionInfoName() {
 		return bundle.getString("sessionInfoName");
 	}
+	/**
+	 * 获得appkey
+	 * 
+	 * @return
+	 */
+	public static final String getSmsAppKey() {
+		return bundle.getString("smsAppKey");
+	}
+	/**
+	 * 获得smsURL
+	 * 
+	 * @return
+	 */
+	public static final String getSmsURL() {
+		return bundle.getString("smsURL");
+	}
 
 	/**
 	 * 通过键获取值

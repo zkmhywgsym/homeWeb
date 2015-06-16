@@ -70,10 +70,10 @@ body,html {
 	map.addEventListener("click",function(e){//点击取坐标
 		alert(e.point.lng + "," + e.point.lat);
 	});
+	map.addEventListener("rightclick",function(e){//点击取坐标
+		addMapMenu(e);
+	});
 	
-	window.onload=function(){
-		addMapMenu();
-	}
 	function getDistance(first,second){
 		return map.getDistance(first,second).toFixed(0);//toFixed(num)保留小数倍数
 	}
@@ -180,6 +180,7 @@ body,html {
 		}
 		
 		function addOverlay(point,msg,clickEvent) {
+			console.info("addOverlay");
 			var p;
 			var m;
 			if(point==null){
@@ -258,7 +259,7 @@ body,html {
 					  title : "海底捞王府井店" , // 信息窗口标题
 					  enableMessage:true,//设置允许信息窗发送短息
 					  message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
-				}
+				};
 			var infoWindow = new BMap.InfoWindow("地址：北京市东城区王府井大街88号乐天银泰百货八层", opts);  // 创建信息窗口对象 
 			marker.addEventListener("click", function(){          
 			map.openInfoWindow(infoWindow,localPoint); //开启信息窗口
@@ -271,7 +272,7 @@ body,html {
 					  title : "设置半径" , // 信息窗口标题
 					  //enableMessage:true,//设置允许信息窗发送短息
 					  message:"亲耐滴，晚上一起吃个饭吧？戳下面的链接看下地址喔~"
-				}
+				};
 			var infoWindow = new BMap.InfoWindow("请设置工作区域半径", opts);  // 创建信息窗口对象 
 			map.openInfoWindow(infoWindow,point);
 		}
@@ -279,13 +280,13 @@ body,html {
 		function addMarkerMenu(mark){
 			var removeMarker = function(e,ee,marker){
 				map.removeOverlay(mark);
-			}
+			};
 			var distance=function(e,ee,marker){
 				alert(getDistance(map.getCenter(),marker.getPosition()));
-			}
+			};
 			var center=function(e,ee,marker){
 				setCenter(marker.getPosition());
-			}
+			};
 			//创建右键菜单
 			var markerMenu=new BMap.ContextMenu();
 			markerMenu.addItem(new BMap.MenuItem('删除',removeMarker.bind(mark)));
@@ -331,39 +332,35 @@ body,html {
 			showWin2(location);
 		}
 		//地图右击事件
-		function addMapMenu(){
-			var p;
+		function addMapMenu(e){
+			var p=new BMap.Point(e.point.lng,e.point.lat);
 			var menu = new BMap.ContextMenu();
 			var txtMenuItem = [
 				{
 					text:'放大',
-					callback:function(){map.zoomIn()}
+					callback:function(){map.zoomIn();}
 				},
 				{
 					text:'重新定位',
-					callback:function(){reLocation()}
+					callback:function(){reLocation();}
 				},
 				{
-					text:'添加',
-					callback:function(){menuClickDistance(addOverlay(p))}
+					text:'添加坐标',
+					callback:function(){menuClickDistance(addOverlay(p));}
 				},
 				{
 					text:'添加工作区域',
-					callback:function(){addWorkSpace(p)}
+					callback:function(){addWorkSpace(p);}
 				},
 				{
 					text:'缩小',
-					callback:function(){map.zoomOut()}
+					callback:function(){map.zoomOut();}
 				}
 			];
 			for(var i=0; i < txtMenuItem.length; i++){
 				menu.addItem(new BMap.MenuItem(txtMenuItem[i].text,txtMenuItem[i].callback,100));
 			}
 			map.addContextMenu(menu);
-			map.addEventListener("rightclick",function(e){
-				p=new BMap.Point(e.point.lng,e.point.lat);
-				//alert(e.point.lng);
-			});
 		}
 		//////////////////////////////map end///////////////////////
 		function toUpdate() {//跳到版本控制页面
