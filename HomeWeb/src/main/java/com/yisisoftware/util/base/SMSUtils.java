@@ -25,12 +25,19 @@ import com.alibaba.druid.util.StringUtils;
 public class SMSUtils {
 	private String BASE_URL="https://api.sms.mob.com/sms/verify";
 	private String APP_KEY="6f994a4ba6c4";
+	private static SMSUtils instance;
 
 	
-	public SMSUtils() {
+	private SMSUtils() {
 		super();
 		this.BASE_URL=ConfigUtil.getSmsURL();
 		this.APP_KEY=ConfigUtil.getSmsAppKey();
+	}
+	public static SMSUtils getInstance(){
+		if(instance==null){
+			instance=new SMSUtils();
+		}
+		return instance;
 	}
 
 

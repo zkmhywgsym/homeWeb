@@ -42,6 +42,10 @@
 		<action name="userDestory" class="userInfoAction" method="userdestory"></action>
     	<!-- 用户注册action -->
 		<action name="userReg" class="userInfoAction" method="regUserInfo"></action>
+    	<!-- 获取用户信息 -->
+		<action name="getUserInfo" class="userInfoAction" method="getInfo"></action>
+    	<!-- 设置用户信息 -->
+		<action name="setUserInfo" class="userInfoAction" method="modifyInfo"></action>
     	<!-- 用户重置action -->
 		<action name="userReset" class="userInfoAction" method="userReset"></action>
 		<!-- 保存反馈意见action -->

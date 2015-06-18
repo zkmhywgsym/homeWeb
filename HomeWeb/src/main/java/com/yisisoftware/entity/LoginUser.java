@@ -24,6 +24,11 @@ public class LoginUser implements Serializable {
 	private String adminUserId;
 	
 	/**
+	 * 用户登状态（待审核：0，正常：1，停用：2）
+	 */
+	private String status="0";
+	
+	/**
 	 * 用户名	
 	 */
 	private String adminUserName;
@@ -144,6 +149,17 @@ public class LoginUser implements Serializable {
 
 	public void setIsUser(String isUser) {
 		this.isUser = isUser;
+	}
+	
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

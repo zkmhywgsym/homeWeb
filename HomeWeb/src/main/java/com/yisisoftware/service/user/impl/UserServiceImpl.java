@@ -8,5 +8,5 @@ import com.yisisoftware.service.user.UserServiceI;
 
 @Service("userService")
 public class UserServiceImpl extends BaseServiceImpl<LoginUser> implements UserServiceI {
-
+	
 }

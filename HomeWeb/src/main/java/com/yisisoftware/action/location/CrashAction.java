@@ -13,7 +13,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.yisisoftware.action.base.BaseAction;
+import com.yisisoftware.entity.Crash;
 import com.yisisoftware.service.base.ICrashServiceI;
 
 @SuppressWarnings("serial")
@@ -43,7 +45,10 @@ public class CrashAction extends BaseAction {
 			}
 			reader.close();
 			//TODO 保存日志
+			String json=sb.toString();
+			Crash crash=JSON.parseObject(json,Crash.class);
 			System.out.println("file content:"+sb.toString());
+			crashService.saveOrUpdate(crash);
 		} catch (Exception e) {
 			e.printStackTrace();
 			msg = "保存失败！";
